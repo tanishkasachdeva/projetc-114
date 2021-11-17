@@ -2,7 +2,8 @@ noseX_m=0;
 noseY_m=0;
 noseX_l=400;
 noseY_l=0;
-result= document.getElementById("enter_btn").value;
+//result= document.getElementById("text_input").value;
+status="";
 
 function preload(){
     mustache= loadImage("https://i.postimg.cc/3x3QzSGq/m.png");
@@ -18,8 +19,7 @@ function setup()
     video.hide();
 
     poseNet=ml5.poseNet(video,modelLoaded);
-    poseNet.on('pose',gotPoses);
-    
+    poseNet.on('pose',gotPoses); 
 }
 
 function gotPoses(results)
@@ -40,13 +40,36 @@ function gotPoses(results)
 function modelLoaded()
 {
     console.log("posNet model is loaded!"); 
-}
 
+}
+function lipstick1()
+{
+    status=true;
+}
+function mustache1()
+{
+ status="";
+}
 
 function draw()
 {
     image(video,0,0,300,300);
-    if (result==true)
+    if (status=="")
+    {
+        image(mustache,noseX_m+5,noseY_m+29,50,50); 
+    }
+    else
+    {
+        image(lipstick,noseX_l+8,noseY_l+50,40,40);
+    }
+    //image(mustache,noseX_m+5,noseY_m+29,50,50);
+    //image(lipstick,noseX_l+8,noseY_l+50,40,40);
+
+} 
+
+/*function check()
+{
+    if (result==mustache)
     {
     image(mustache,noseX_m+5,noseY_m+29,50,50);
     }
@@ -55,6 +78,7 @@ function draw()
         image(lipstick,noseX_l+8,noseY_l+50,40,40);
     }
 }   
+*/
 
 function take_snapshot()
     {
